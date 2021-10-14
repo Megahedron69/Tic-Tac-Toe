@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="http://fonts.cdnfonts.com/css/bomber-balloon"
+      rel="stylesheet"
+    />
+    <title>Tic-Tac-Toe</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      zoom: 0.9;
+    }
+    body {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("https://images.unsplash.com/photo-1499195333224-3ce974eecb47?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80");
+      background-size: cover;
+    }
+    .heading {
+      font-family: "Bomber Balloon", sans-serif;
+      font-size: 145px;
+      margin: auto;
+      text-align: center;
+      text-shadow: 3px 3px 8px black;
+    }
+    .parent {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+      margin: 0.8% 15%;
+    }
+    .parent div {
+      font-size: 90px;
+      text-align: center;
+      padding: 48px;
+      border: 1px thin;
+      cursor: pointer;
+      color: #dd0004;
+    }
+    .div1,
+    .div2,
+    .div3,
+    .div4,
+    .div5,
+    .div6 {
+      border-bottom: 2px solid #b026ff;
+    }
+    .div1,
+    .div4,
+    .div7,
+    .div2,
+    .div5,
+    .div8 {
+      border-right: 2px solid #b026ff;
+    }
+    .div1 {
+      grid-area: 1 / 1 / 2 / 2;
+    }
+    .div2 {
+      grid-area: 1 / 2 / 2 / 3;
+    }
+    .div3 {
+      grid-area: 1 / 3 / 2 / 4;
+    }
+    .div4 {
+      grid-area: 2 / 1 / 3 / 2;
+    }
+    .div5 {
+      grid-area: 2 / 2 / 3 / 3;
+    }
+    .div6 {
+      grid-area: 2 / 3 / 3 / 4;
+    }
+    .div7 {
+      grid-area: 3 / 1 / 4 / 2;
+    }
+    .div8 {
+      grid-area: 3 / 2 / 4 / 3;
+    }
+    .div9 {
+      grid-area: 3 / 3 / 4 / 4;
+    }
+    /**************Button css from codepen:https://codepen.io/team/keyframers/pen/wvvoBQW**********/
+    @import url("https://fonts.googleapis.com/css?family=Fascinate+Inline&display=swap");
+    .treat-wrapper {
+      margin-top: 2%;
+      display: flex;
+      justify-content: center;
+    }
+    .treat-button {
+      font-family: "Fascinate Inline", cursive;
+      font-size: 2.5vmin;
+      appearance: none;
+      background: linear-gradient(to bottom, #f46001, #e14802);
+      border: none;
+      color: #fff;
+      border-radius: 2em;
+      padding: 0.6em 1.5em;
+      overflow: hidden;
+      user-select: none;
+      cursor: pointer;
+      z-index: 1;
+      box-shadow: 0 0 1em rgba(white, 0.2);
+      transition: transform 0.1s cubic-bezier(0.5, 0, 0.5, 1), box-shadow 0.2s;
+      outline: none;
+    }
+    .treat-button:hover {
+      box-shadow: 0 0 2em rgba(white, 0.3);
+    }
+
+    .treat-button:active {
+      transform: scale(0.8) translateY(10%);
+      transition-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+    }
+
+    .treat {
+      --scale-x: 0;
+      --scale-y: 0;
+      pointer-events: none;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: calc(50% - 0.5rem);
+      border-radius: 50%;
+      width: 1em;
+      height: 1em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 5vmin;
+      transform: translate(calc(var(--x) * 1px), calc(var(--y) * 1px))
+        translate(-50%, -50%);
+      pointer-events: none;
+      animation: treat-enter 0.1s ease-in backwards,
+        treat-exit 300ms linear calc((var(--lifetime, 3000) * 1ms) - 300ms)
+          forwards;
+
+      @keyframes treat-enter {
+        from {
+          opacity: 0;
+        }
+      }
+      @keyframes treat-exit {
+        to {
+          opacity: 0;
+        }
+      }
+    }
+    .inner {
+      animation: inner-rotate 0.6s linear infinite;
+      transform: rotate(calc(-1turn * var(--direction)));
+      @keyframes inner-rotate {
+        to {
+          transform: none;
+        }
+      }
+    }
+    /**************Button css from codepen:https://codepen.io/team/keyframers/pen/wvvoBQW**********/
+  </style>
+  <body>
+    <h1 class="heading">
+      <span style="color: #c6fecc">T</span><span style="color: #ccc6fe">i</span
+      ><span style="color: #fee8c6">c</span>
+      <span style="color: #fec6dc">T</span><span style="color: #c6fee8">a</span
+      ><span style="color: #c6dcfe">c</span>
+      <span style="color: #c6f8fe">T</span><span style="color: #ffbcd9">o</span
+      ><span style="color: #ffb64b">e</span>
+    </h1>
+    <div class="parent">
+      <div class="block div1" id="0">1</div>
+      <div class="block div2" id="1">2</div>
+      <div class="block div3" id="2">3</div>
+      <div class="block div4" id="3">4</div>
+      <div class="block div5" id="4">5</div>
+      <div class="block div6" id="5">6</div>
+      <div class="block div7" id="6">7</div>
+      <div class="block div8" id="7">8</div>
+      <div class="block div9" id="8">9</div>
+    </div>
+    <div class="treat-wrapper">
+      <button class="treat-button" id="replay">Play Again!</button>
+    </div>
+  </body>
+  <script src="replay.js"></script>
+  <script src="app.js" charset="utf-8"></script>
+</html>
