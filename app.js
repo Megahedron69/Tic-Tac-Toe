@@ -2,6 +2,7 @@ console.log("js1 good to go");
 /**************************DOM VARIABLES************/
 let tiles = document.querySelectorAll(".block");
 let replay = document.getElementById("replay");
+const colored = document.querySelectorAll("span");
 /**************************ARRAYS AND OBJS**********/
 const winCombos = [
   [0, 1, 2],
@@ -12,6 +13,17 @@ const winCombos = [
   [2, 5, 8],
   [0, 4, 8],
   [6, 4, 2],
+];
+const colors = [
+  "#c6fecc",
+  "#ccc6fe",
+  "#fee8c6",
+  "#fec6dc",
+  "#c6fee8",
+  "#c6dcfe",
+  "#c6f8fe",
+  "#ffbcd9",
+  "#ffb64b",
 ];
 /*************************VARIABLES****************/
 let origboard;
@@ -39,3 +51,7 @@ const startgame = () => {
 startgame();
 /*********************EVENT LISTENERS**************/
 replay.addEventListener("click", startgame);
+/**********************HEADING COLORS**************/
+for (let i = 0; i < colored.length; i++) {
+  colored[i].style.color = `${colors[i]}`;
+}
